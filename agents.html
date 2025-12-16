@@ -13,8 +13,20 @@
 <body>
     <div class="container p-3">
         <div class="row">
-            <div class="column">
+            <div class="col">
                 <a href="index.html" class="btn btn-primary">HOME</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-4">
+        <div class="row">
+            <div class="col">
+                <div class="card p-3 shadow-sm rounded-4">
+                    <label for="searchInput" class="form-label">Search Agent</label>
+                    <input id="searchInput" class="form-control" placeholder="Enter agent name">
+                    <button class="btn btn-primary mt-3" onclick="search()">Search</button>
+                </div>
             </div>
         </div>
     </div>
@@ -26,32 +38,63 @@
 
     <script>
         var agentGallery = document.getElementById("agentGallery");
+        var searchInput = document.getElementById("searchInput");
+        var agentsData = [];
 
         const getAgents = async () => {
-            const response = await fetch('https://valorant-api.com/v1/agents?isPlayableCharacter=true');
+            const response = await fetch(
+                "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
+            );
             const data = await response.json();
-            const agents = data.data;
+
+            agentsData = data.data;
+            displayAgents(agentsData);
+        };
+
+        function displayAgents(agents) {
+            agentGallery.innerHTML = "";
 
             for (var i = 0; i < agents.length; i++) {
                 var agent = agents[i];
-                var agentName = agent.displayName;
-                var agentPic = agent.displayIcon;
 
                 agentGallery.innerHTML += `
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="card my-3 shadow p-3 rounded-4 text-center">
-                            <img src="`+ agentPic + `" class="card-img-top mx-auto mt-3" style="width:200px;">
-                                <div class="card-body">
-                                    <h5 class="card-title">`+ agentName + `</h5>
-                                </div>
+                            <img src="`+ agent.displayIcon + `"class="card-img-top mx-auto mt-3" style="width:200px;">
+                            <div class="card-body">
+                                <h5 class="card-title">`+ agent.displayName + `</h5>
+                            </div>
                         </div>
                     </div>
-                    `;
+                `;
             }
         }
 
-        getAgents();
+        function search() {
+            var keyword = searchInput.value.toLowerCase();
 
+            if (keyword === "") {
+                displayAgents(agentsData);
+                return;
+            }
+
+            var filteredAgents = agentsData.filter(agent =>
+                agent.displayName.toLowerCase().includes(keyword)
+            );
+
+            if (filteredAgents.length === 0) {
+                agentGallery.innerHTML = `
+                    <div class="col text-center text-danger h5 mt-4">
+                        No agent found
+                    </div>
+                `;
+                return;
+            }
+
+            displayAgents(filteredAgents);
+        }
+
+        getAgents();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
