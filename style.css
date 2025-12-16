@@ -61,3 +61,7 @@
     background-color: #ff4655;
     transform: scale(1.05);
 }
+
+.nav-link {
+    color: white;
+}
