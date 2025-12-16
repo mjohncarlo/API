@@ -25,3 +25,9 @@
 .weapons {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('img/weaponsbg.png') center/cover no-repeat;
 }
+
+.weaponImg {
+    width: 220px;
+    height: 160px;
+    object-fit: contain;
+}
