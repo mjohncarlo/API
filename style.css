@@ -65,3 +65,7 @@
 .nav-link {
     color: white;
 }
+
+.agent-desc {
+    text-align: justify;
+}

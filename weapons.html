@@ -51,15 +51,16 @@
             weaponGallery.innerHTML = "";
             for (var i = 0; i < weaponsToDisplay.length; i++) {
                 var weapon = weaponsToDisplay[i];
-                var weaponName = weapon.displayName;
-                var weaponPic = weapon.displayIcon;
 
                 weaponGallery.innerHTML += `
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card my-3 shadow p-3 rounded-4 text-center glass">
-                        <img src="`+ weaponPic +`" class="weaponImg mx-auto mt-3">
+                        <img src="`+ weapon.displayIcon +`" class="weaponImg mx-auto mt-3">
                         <div class="card-body">
-                            <h5 class="card-title">`+ weaponName +`</h5>
+                            <h5 class="card-title pb-3">`+ weapon.displayName +`</h5>
+                            <p class="card-text"><strong>Fire Rate:</strong> `+ weapon.weaponStats.fireRate +`</p>
+                            <p class="card-text"><strong>Magazine Size:</strong> `+ weapon.weaponStats.magazineSize +`</p>
+                            <p class="card-text"><strong>Damage:</strong> Head: `+ weapon.weaponStats?.damageRanges?.[0]?.headDamage +`, Body: `+ weapon.weaponStats?.damageRanges?.[0]?.bodyDamage +`</p>
                         </div>
                     </div>
                 </div>
