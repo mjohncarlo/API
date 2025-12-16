@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="bg">
     <div class="container p-3">
         <div class="row">
             <div class="col">
-                <a href="index.html" class="btn btn-primary">HOME</a>
+                <a href="index.html" class="btn btn-secondary">HOME</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@
                 <div class="card p-3 shadow-sm rounded-4">
                     <label for="searchInput" class="form-label">Search Agent</label>
                     <input id="searchInput" class="form-control" placeholder="Enter agent name">
-                    <button class="btn btn-primary mt-3" onclick="search()">Search</button>
+                    <button class="btn btn-info mt-3" onclick="search()">Search</button>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
 
                 agentGallery.innerHTML += `
                     <div class="col-12 col-md-6 col-lg-6">
-                        <div class="card my-3 shadow p-3 rounded-4 text-center">
+                        <div class="card my-3 shadow p-3 rounded-4 text-center glass">
                             <img src="`+ agent.displayIcon + `"class="card-img-top mx-auto mt-3" style="width:200px;">
                             <div class="card-body">
                                 <h5 class="card-title">`+ agent.displayName + `</h5>

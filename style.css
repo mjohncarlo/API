@@ -15,6 +15,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
+    text-align: center;
     color: white;
 }
 
@@ -30,4 +31,33 @@
     width: 220px;
     height: 160px;
     object-fit: contain;
+}
+
+.bg {
+    background-image: url("img/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.glass {
+    background: rgba(0, 170, 255, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 1.25rem;
+    border: 1px solid white;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    color: white;
+}
+
+.hero-btn {
+    background-color: #ff4655;
+    transition: transform 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: #ff4655;
+    transform: scale(1.05);
 }
