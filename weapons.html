@@ -13,8 +13,19 @@
 <body>
     <div class="container p-3">
         <div class="row">
-            <div class="column">
+            <div class="col-6">
                 <a href="index.html" class="btn btn-primary">HOME</a>
+            </div>
+            <div class="col-6">
+                <select class="form-select" aria-label="Weapon Filter" id="weaponCategory">
+                    <option value="all" selected>All Category</option>
+                    <option value="Rifles">Rifles</option>
+                    <option value="SMGs">SMGs</option>
+                    <option value="Heavy Weapons">Heavy Weapons</option>
+                    <option value="Sniper Rifles">Sniper Rifles</option>
+                    <option value="Shotguns">Shotguns</option>
+                    <option value="Pistols">Pistols</option>
+                </select>
             </div>
         </div>
     </div>
@@ -26,33 +37,55 @@
 
     <script>
         var weaponGallery = document.getElementById("weaponGallery");
+        var weaponCategory = document.getElementById("weaponCategory");
+        var weapons = [];
 
         const getWeapons = async () => {
             const response = await fetch('https://valorant-api.com/v1/weapons');
             const data = await response.json();
-            const weapons = data.data;
+            weapons = data.data;
+            displayWeapons(weapons);
+        }
 
-            for (var i = 0; i < weapons.length; i++) {
-                var weapon = weapons[i];
+        const displayWeapons = (weaponsToDisplay) => {
+            weaponGallery.innerHTML = "";
+            for (var i = 0; i < weaponsToDisplay.length; i++) {
+                var weapon = weaponsToDisplay[i];
                 var weaponName = weapon.displayName;
                 var weaponPic = weapon.displayIcon;
 
                 weaponGallery.innerHTML += `
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card my-3 shadow p-3 rounded-4 text-center">
-                            <img src="`+ weaponPic + `" class="weaponImg mx-auto mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title">`+ weaponName + `</h5>
-                            </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card my-3 shadow p-3 rounded-4 text-center">
+                        <img src="`+ weaponPic +`" class="weaponImg mx-auto mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title">`+ weaponName +`</h5>
                         </div>
                     </div>
-                `;
+                </div>
+            `;
             }
         }
 
+        weaponCategory.addEventListener("change", function () {
+            var selectedCategory = weaponCategory.value;
+
+            if (selectedCategory === "all") {
+                displayWeapons(weapons);
+            } else {
+                var filteredWeapons = [];
+                for (var i = 0; i < weapons.length; i++) {
+                    if (weapons[i].shopData?.category === selectedCategory) {
+                        filteredWeapons.push(weapons[i]);
+                    }
+                }
+                displayWeapons(filteredWeapons);
+            }
+        });
+
         getWeapons();
     </script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
