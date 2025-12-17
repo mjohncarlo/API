@@ -11,21 +11,15 @@
 </head>
 
 <body class="bg">
-    <div class="container p-3">
+    <div class="container-fluid bg-dark sticky-top p-3">
         <div class="row">
-            <div class="col">
+            <div class="col-6">
                 <a href="index.html" class="btn btn-secondary">HOME</a>
             </div>
-        </div>
-    </div>
-
-    <div class="container my-4">
-        <div class="row">
-            <div class="col">
-                <div class="card p-3 shadow-sm rounded-4">
-                    <label for="searchInput" class="form-label">Search Agent</label>
-                    <input id="searchInput" class="form-control" placeholder="Enter agent name">
-                    <button class="btn btn-info mt-3" onclick="search()">Search</button>
+            <div class="col-6">
+                <div class="d-flex gap-2">
+                    <input id="searchInput" class="form-control" placeholder="Enter name">
+                    <button class="btn btn-info" onclick="search()">Search</button>  
                 </div>
             </div>
         </div>
